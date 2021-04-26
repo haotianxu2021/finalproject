@@ -1,9 +1,8 @@
 """
 Team Member: Horace Xu, Tianyi Yang
-Repo link: https://github.com/usc-ee250-spring2021/lab05-horacexu/tree/lab5/ee250/lab05
-ssh: git@github.com:usc-ee250-spring2021/lab05-horacexu.git
+
 """
-"""EE 250L Lab 04 Starter Code
+"""EE 250L Final Project
 
 Run rpi_pub_and_sub.py on your Raspberry Pi."""
 
@@ -30,15 +29,20 @@ if __name__ == '__main__':
     client.on_connect = on_connect
     client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
     client.loop_start()
-    
+    light = 0
     ult = 3
-    
+    dht_sensor_port = 7
+    sound_sensor = 1
     
 
     while True:
-        
-        aaa = grovepi.ultrasonicRead(ult)
-        client.publish("horace/ultrasonicRanger", aaa)
-
-        time.sleep(10)
+        li = grovepi.analogRead(light)
+        client.publish("project/lightsensor", li)
+        [ temp,hum ] = grovepi.dht(dht_sensor_port,0)
+        sound_int=grovepi.analogRead(sound_sensor)
+        client.publish("project/temperature", temp)
+        client.publish("project/hum", hum)
+        client.publish("project/sound", sound_int)
+        print("temp =", temp, "C\thumidity =", hum,"%")
+        time.sleep(5)
 

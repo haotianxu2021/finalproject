@@ -1,11 +1,8 @@
 """
 Team Member: Horace Xu, Tianyi Yang
-Repo link: https://github.com/usc-ee250-spring2021/lab05-horacexu/tree/lab5/ee250/lab05
-ssh: git@github.com:usc-ee250-spring2021/lab05-horacexu.git
-"""
-"""EE 250L Lab 04 Starter Code
 
-Run vm_publisher.py in a separate terminal on your VM."""
+"""
+"""not use"""
 
 import paho.mqtt.client as mqtt
 import time
