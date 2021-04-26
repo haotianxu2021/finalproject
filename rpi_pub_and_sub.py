@@ -47,6 +47,8 @@ if __name__ == '__main__':
         print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
         if temp >=25:
             grovepi.digitalWrite(buzzer, 1)
+            time.sleep(0.5)
+            grovepi.digitalWrite(buzzer, 0)
 
         time.sleep(3)
 
