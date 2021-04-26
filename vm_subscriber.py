@@ -9,14 +9,15 @@ Run vm_subscriber.py in a separate terminal on your VM."""
 
 import paho.mqtt.client as mqtt
 import time
+import requests
 def ul_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
-    
+    temps = message.payload.decode()
+    s = requests.get('https://dweet.io/dweet/for/mytestf?temp='+temps)
+    time.sleep(5)
     print('VM: {}cm'.format(message.payload.decode()))
 
-def button_callback(client, userdata, message):
-    if message.payload.decode() == '1':
-        print('Button pressed!')
+
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -24,8 +25,7 @@ def on_connect(client, userdata, flags, rc):
     #subscribe to the ultrasonic ranger topic here
     client.subscribe("horace/ultrasonicRanger")
     client.message_callback_add("horace/ultrasonicRanger", ul_callback)
-    client.subscribe("horace/button")
-    client.message_callback_add("horace/button", button_callback)
+    
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -41,6 +41,6 @@ if __name__ == '__main__':
 
     while True:
         
-        time.sleep(1)
+        time.sleep(10)
             
 
