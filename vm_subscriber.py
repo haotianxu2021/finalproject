@@ -40,7 +40,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("project/sound")
     client.message_callback_add("project/sound", sound_callback)
     client.subscribe("project/hum")
-    client.message_callback_add("project/hum", sound_callback)
+    client.message_callback_add("project/hum", hum_callback)
     
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):

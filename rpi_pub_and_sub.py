@@ -43,6 +43,6 @@ if __name__ == '__main__':
         client.publish("project/temperature", temp)
         client.publish("project/hum", hum)
         client.publish("project/sound", sound_int)
-        print("temp =", temp, "C\thumidity =", hum,"%")
+        print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
         time.sleep(5)
 
