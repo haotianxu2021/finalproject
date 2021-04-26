@@ -45,7 +45,7 @@ if __name__ == '__main__':
         client.publish("project/hum", hum)
         client.publish("project/sound", sound_int)
         print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
-        if temp >=25:
+        if temp >=28: #supposed to be 65; just test here
             grovepi.digitalWrite(buzzer, 1)
             time.sleep(0.5)
             grovepi.digitalWrite(buzzer, 0)
