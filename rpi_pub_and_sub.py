@@ -33,8 +33,9 @@ if __name__ == '__main__':
     ult = 3
     dht_sensor_port = 7
     sound_sensor = 1
-    
-
+    buzzer = 3
+    grovepi.pinMode(buzzer, "OUTPUT")
+    grovepi.digitalWrite(buzzer, 0)
     while True:
         li = grovepi.analogRead(light)
         client.publish("project/lightsensor", li)
@@ -44,5 +45,8 @@ if __name__ == '__main__':
         client.publish("project/hum", hum)
         client.publish("project/sound", sound_int)
         print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
-        time.sleep(5)
+        if temp >=25:
+            grovepi.digitalWrite(buzzer, 1)
+
+        time.sleep(3)
 
