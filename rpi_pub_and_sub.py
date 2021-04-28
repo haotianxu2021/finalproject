@@ -50,5 +50,5 @@ if __name__ == '__main__':
             time.sleep(0.2)
             grovepi.digitalWrite(buzzer, 0)
 
-        time.sleep(5)
+        time.sleep(10)
 

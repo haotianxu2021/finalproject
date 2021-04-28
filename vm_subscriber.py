@@ -13,22 +13,25 @@ def temp_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     temps = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/mytestf?temp='+temps)
-    
+    print("temp:",temps)
 
 def li_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     lights = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/lightfinal?light='+lights)
+    print(" light:",lights)
     
 def sound_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message   
     sound = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/soundfinal?sounds='+sound)
+    print(" sound:",sound)
 
 def hum_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message   
     hums = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/humilfinal?hum='+hums)
+    print(" humidity:",hums)
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
