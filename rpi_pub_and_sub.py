@@ -33,6 +33,8 @@ if __name__ == '__main__':
     ult = 3
     dht_sensor_port = 7
     sound_sensor = 1
+    led = 1
+    grovepi.pinMode(led,"OUTPUT")
     #buzzer = 3
     #grovepi.pinMode(buzzer, "OUTPUT")
     #grovepi.digitalWrite(buzzer, 0)
@@ -48,10 +50,10 @@ if __name__ == '__main__':
             print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
             if hum <= 15:
                 setRGB(255, 0, 0)
-                setText_norefresh('need water!')
+                setText_norefresh('too dry!')
             elif hum <= 30 and hum > 15:
                 setRGB(255, 128, 0)
-                setText_norefresh('need water soon!')
+                setText_norefresh('need water!')
             elif hum <= 45 and hum > 30:
                 setRGB(255, 255, 0)
                 setText_norefresh('Not dry!')
@@ -61,6 +63,11 @@ if __name__ == '__main__':
             elif hum > 60:
                 setRGB(0, 255, 255)
                 setText_norefresh('too much water!')
+            if li <= 100:
+                grovepi.digitalWrite(led,1) #Turn on LED to supply light. In real application, it may be a larger LED or light source
+            else:
+                grovepi.digitalWrite(led,0)
+
             time.sleep(30)
         except KeyboardInterrupt:
         # Gracefully shutdown on Ctrl-C
