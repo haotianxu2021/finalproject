@@ -24,7 +24,7 @@ def li_callback(client, userdata, message):
 def humnotice_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     wat = message.payload.decode()
-    s = requests.get('https://dweet.io/dweet/for/lightfinal?light='+wat)
+    s = requests.get('https://dweet.io/dweet/for/waterfinal?Water='+wat)
     print(" Water:",wat)
 
 def hum_callback(client, userdata, message):
