@@ -21,11 +21,11 @@ def li_callback(client, userdata, message):
     s = requests.get('https://dweet.io/dweet/for/lightfinal?light='+lights)
     print(" light:",lights)
     
-def sound_callback(client, userdata, message):
-    #the third argument is 'message' here unlike 'msg' in on_message   
-    sound = message.payload.decode()
-    s = requests.get('https://dweet.io/dweet/for/soundfinal?sounds='+sound)
-    print(" sound:",sound)
+def humnotice_callback(client, userdata, message):
+    #the third argument is 'message' here unlike 'msg' in on_message 
+    wat = message.payload.decode()
+    s = requests.get('https://dweet.io/dweet/for/lightfinal?light='+wat)
+    print(" Water:",wat)
 
 def hum_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message   
@@ -40,8 +40,8 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("project/temperature", temp_callback)
     client.subscribe("project/lightsensor")
     client.message_callback_add("project/lightsensor", li_callback)
-    client.subscribe("project/sound")
-    client.message_callback_add("project/sound", sound_callback)
+    client.subscribe("project/humnotice")
+    client.message_callback_add("project/humnotice", humnotice_callback)
     client.subscribe("project/hum")
     client.message_callback_add("project/hum", hum_callback)
     

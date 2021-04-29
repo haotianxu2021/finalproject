@@ -32,7 +32,7 @@ if __name__ == '__main__':
     light = 0
     ult = 3
     dht_sensor_port = 7
-    sound_sensor = 1
+    #sound_sensor = 1
     led = 4
     grovepi.pinMode(led,"OUTPUT")
     #buzzer = 3
@@ -43,32 +43,37 @@ if __name__ == '__main__':
             li = grovepi.analogRead(light)
             client.publish("project/lightsensor", li)
             [ temp,hum ] = grovepi.dht(dht_sensor_port,0)
-            sound_int = grovepi.analogRead(sound_sensor)
+            #sound_int = grovepi.analogRead(sound_sensor)
             client.publish("project/temperature", temp)
             client.publish("project/hum", hum)
-            client.publish("project/sound", sound_int)
-            print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
+            #client.publish("project/sound", sound_int)
+            print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li)
             if hum <= 15:
                 setRGB(255, 0, 0)
                 setText_norefresh('too dry!')
+                client.publish("project/humnotice",1)
             elif hum <= 30 and hum > 15:
                 setRGB(255, 128, 0)
                 setText_norefresh('need water!')
+                client.publish("project/humnotice",1)
             elif hum <= 45 and hum > 30:
                 setRGB(255, 255, 0)
                 setText_norefresh('Not dry!')
+                client.publish("project/humnotice",0)
             elif hum <= 60 and hum > 45:
                 setRGB(0, 255, 0)
                 setText_norefresh('enought water!')
+                client.publish("project/humnotice",0)
             elif hum > 60:
                 setRGB(0, 255, 255)
                 setText_norefresh('too much water!')
+                client.publish("project/humnotice",0)
             if li <= 100:
                 grovepi.digitalWrite(led,1) #Turn on LED to supply light. In real application, it may be a larger LED or light source
             else:
                 grovepi.digitalWrite(led,0)
 
-            time.sleep(30)
+            time.sleep(25)
         except KeyboardInterrupt:
         # Gracefully shutdown on Ctrl-C
             setText('')
