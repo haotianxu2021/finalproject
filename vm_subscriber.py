@@ -27,6 +27,12 @@ def humnotice_callback(client, userdata, message):
     s = requests.get('https://dweet.io/dweet/for/waterfinal?Water='+wat)
     print(" Water:",wat)
 
+def lednotice_callback(client, userdata, message):
+    #the third argument is 'message' here unlike 'msg' in on_message 
+    led = message.payload.decode()
+    s = requests.get('https://dweet.io/dweet/for/ledfinal?Water='+led)
+    print(" Led:",led)
+
 def hum_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message   
     hums = message.payload.decode()
@@ -42,6 +48,8 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("project/lightsensor", li_callback)
     client.subscribe("project/humnotice")
     client.message_callback_add("project/humnotice", humnotice_callback)
+    client.subscribe("project/lednotice")
+    client.message_callback_add("project/lednotice", lednotice_callback)
     client.subscribe("project/hum")
     client.message_callback_add("project/hum", hum_callback)
     

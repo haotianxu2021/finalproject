@@ -70,10 +70,12 @@ if __name__ == '__main__':
                 client.publish("project/humnotice",0)
             if li <= 100:
                 grovepi.digitalWrite(led,1) #Turn on LED to supply light. In real application, it may be a larger LED or light source
+                client.publish("project/lednotice",1)
             else:
                 grovepi.digitalWrite(led,0)
+                client.publish("project/lednotice",0)
 
-            time.sleep(25)
+            time.sleep(20)
         except KeyboardInterrupt:
         # Gracefully shutdown on Ctrl-C
             setText('')
