@@ -33,22 +33,38 @@ if __name__ == '__main__':
     ult = 3
     dht_sensor_port = 7
     sound_sensor = 1
-    buzzer = 3
-    grovepi.pinMode(buzzer, "OUTPUT")
-    grovepi.digitalWrite(buzzer, 0)
+    #buzzer = 3
+    #grovepi.pinMode(buzzer, "OUTPUT")
+    #grovepi.digitalWrite(buzzer, 0)
     while True:
         li = grovepi.analogRead(light)
         client.publish("project/lightsensor", li)
         [ temp,hum ] = grovepi.dht(dht_sensor_port,0)
-        sound_int=grovepi.analogRead(sound_sensor)
+        sound_int = grovepi.analogRead(sound_sensor)
         client.publish("project/temperature", temp)
         client.publish("project/hum", hum)
         client.publish("project/sound", sound_int)
         print("temp =", temp, "C\thumidity =", hum,"%"," light = ",li, " sound = ",sound_int)
-        if temp >=28: #supposed to be 65; just test here
+        if hum <= 15:
+            lcd.setRGB(255, 0, 0)
+            lcd.setText_norefresh('need water!')
+        elif hum <= 30 and hum > 15:
+            lcd.setRGB(255, 128, 0)
+            lcd.setText_norefresh('need water soon!')
+        elif hum <= 45 and hum > 30:
+            lcd.setRGB(255, 255, 0)
+            lcd.setText_norefresh('Not dry!')
+        elif hum <= 60 and hum > 45:
+            lcd.setRGB(0, 255, 0)
+            lcd.setText_norefresh('enought water!')
+        elif hum > 60:
+            lcd.setRGB(0, 255, 255)
+            lcd.setText_norefresh('too much water!')
+
+        '''if temp >=28: #supposed to be 65; just test here
             grovepi.digitalWrite(buzzer, 1)
             time.sleep(0.2)
-            grovepi.digitalWrite(buzzer, 0)
+            grovepi.digitalWrite(buzzer, 0)'''
 
         time.sleep(30)
 
