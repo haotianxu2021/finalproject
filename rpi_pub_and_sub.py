@@ -33,7 +33,7 @@ if __name__ == '__main__':
     ult = 3
     dht_sensor_port = 7
     sound_sensor = 1
-    led = 1
+    led = 4
     grovepi.pinMode(led,"OUTPUT")
     #buzzer = 3
     #grovepi.pinMode(buzzer, "OUTPUT")
