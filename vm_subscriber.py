@@ -19,25 +19,25 @@ def li_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     lights = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/lightfinal?light='+lights)
-    print(" light:",lights)
+    print("light:",lights)
     
 def humnotice_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     wat = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/waterfinal?Water='+wat)
-    print(" Water:",wat)
+    print("Water:",wat)
 
 def lednotice_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     led = message.payload.decode()
-    s = requests.get('https://dweet.io/dweet/for/ledfinal?Water='+led)
-    print(" Led:",led)
+    s = requests.get('https://dweet.io/dweet/for/ledfinal?led='+led)
+    print("Led:",led)
 
 def hum_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message   
     hums = message.payload.decode()
     s = requests.get('https://dweet.io/dweet/for/humilfinal?hum='+hums)
-    print(" humidity:",hums)
+    print("humidity:",hums)
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
