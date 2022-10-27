@@ -7,4 +7,4 @@ Instruction:
    Libraries used: paho.mqtt.client, time, grovepi, grove_rgb_lcd
 2. On VM, use python3 to run vm_subscriber.py
    Libraries used: paho.mqtt.client, time, requests
-3. On a web browser, open freeboard using the link: https://freeboard.io/board/V8ZteA
+3. On a web browser, open freeboard using the link:https://freeboard.io/board/V8ZteA
